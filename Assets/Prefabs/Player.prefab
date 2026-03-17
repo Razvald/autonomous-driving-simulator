@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 5646986307969242058}
   - component: {fileID: 2354445721176468861}
   - component: {fileID: 741128873975978056}
+  - component: {fileID: 2858619516876331869}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -187,7 +188,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: -0.035947442, y: 0.035947084}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -197,7 +198,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.797372, y: 5.241799}
   m_EdgeRadius: 0
 --- !u!114 &741128873975978056
 MonoBehaviour:
@@ -214,3 +215,26 @@ MonoBehaviour:
   acceleration: 8
   steering: 120
   maxSpeed: 10
+  damping: 1
+--- !u!114 &2858619516876331869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400561491075049601}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: afcd175776196f916bc7bc6a6a43ab4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoadDetector
+  roadLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  checkPoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  checkRadius: 0.2
+  isOnRoad: 0
