@@ -24,6 +24,7 @@ Thumbs.db
 *.mdb
 *.opendb
 *.VC.db
+*.pdf
 
 .vscode/
 .idea/
