@@ -54,6 +54,8 @@ Analysis:
 
 ## Project Status
 
+![status](image.png)
+
 Early prototype.
 
 Current stage:
