@@ -37,3 +37,11 @@ Thumbs.db
 *.tmp
 
 README.pdf
+
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+UserSettings/

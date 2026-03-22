@@ -7,6 +7,7 @@ public class RoadDetector : MonoBehaviour
     public float checkRadius = 0.2f;
 
     public bool isOnRoad;
+    private bool wasOnRoad = true;
 
     void Update()
     {
@@ -21,7 +22,13 @@ public class RoadDetector : MonoBehaviour
 
         isOnRoad = onRoadCount == 4;
 
-        if (!isOnRoad)
-            Debug.Log("ВНЕ дороги");
+        if (isOnRoad != wasOnRoad)
+        {
+            if (!isOnRoad)
+                Debug.Log("Машина выехала за пределы дороги!");
+            else
+                Debug.Log("Машина вернулась на дорогу");
+            wasOnRoad = isOnRoad;
+        }
     }
 }
