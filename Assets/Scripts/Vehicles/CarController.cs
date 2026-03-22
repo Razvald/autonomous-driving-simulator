@@ -20,7 +20,7 @@ public class CarController : MonoBehaviour
         float move = Input.GetAxis("Vertical");
         float turn = Input.GetAxis("Horizontal");
 
-        // Движение
+        // Ограничение скорости
         if (rb.linearVelocity.magnitude < maxSpeed)
         {
             rb.AddForce(transform.up * move * acceleration);

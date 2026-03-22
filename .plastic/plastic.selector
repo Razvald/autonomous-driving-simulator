@@ -1,4 +1,0 @@
-repository "TestCar/Catalyst_Car@10171485758420@cloud"
-  path "/"
-    br "/main"
-    co "/main"

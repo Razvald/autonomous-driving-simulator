@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 1081230199963166886}
   - component: {fileID: 8218114355492956074}
   m_Layer: 6
-  m_Name: Player
+  m_Name: PlayerPrefab
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,8 +151,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1400561491075049601}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.42510805, w: 0.90514266}
-  m_LocalPosition: {x: -0.20532256, y: -1.0842446, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalPosition: {x: -24.59, y: -2.6, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -162,7 +162,7 @@ Transform:
   - {fileID: 3134067328384175358}
   - {fileID: 3373696383732360996}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -50.315}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
 --- !u!50 &5646986307969242058
 Rigidbody2D:
   serializedVersion: 5
@@ -286,6 +286,7 @@ MonoBehaviour:
   steering: 120
   maxSpeed: 30
   damping: 1
+  carType: 0
 --- !u!1 &1817163887510422291
 GameObject:
   m_ObjectHideFlags: 0

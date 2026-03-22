@@ -4,17 +4,19 @@
 [Bb]uild/
 [Bb]uilds/
 [Ll]ogs/
-UserSettings/
+[Uu]ser[Ss]ettings/
 
-MemoryCaptures/
-Recordings/
+[Mm]emory[Cc]aptures/
+[Rr]ecordings/
 
-.DS_Store
-Thumbs.db
+.vs/
+.vscode/
+.idea/
 
 *.csproj
 *.unityproj
 *.sln
+*.suo
 *.user
 *.userprefs
 *.pidb
@@ -24,7 +26,14 @@ Thumbs.db
 *.mdb
 *.opendb
 *.VC.db
-*.pdf
 
-.vscode/
-.idea/
+.DS_Store
+Thumbs.db
+
+.plastic/
+
+*.private.*
+*~
+*.tmp
+
+README.pdf
