@@ -21,9 +21,7 @@ public class RoadDetector : MonoBehaviour
 
         isOnRoad = onRoadCount == 4;
 
-        if (isOnRoad)
-            Debug.Log("На дороге");
-        else
-            Debug.Log("ВНЕ дороги");
+        if (!isOnRoad)
+            Debug.Log("ВНЕ дороге");
     }
 }
