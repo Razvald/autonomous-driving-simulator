@@ -25,13 +25,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552139591496617733}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: -0.7071068, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0.7071068, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 4, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3330570003455328978}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!212 &5690676529118530330
 SpriteRenderer:
   serializedVersion: 2
@@ -81,12 +81,12 @@ SpriteRenderer:
   m_SortingLayer: 2
   m_SortingOrder: 0
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 1169515157355589464, guid: cd4fbca97962eb115b72e26aabb76f54, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Sprite: {fileID: 7482667652216324306, guid: 209c1835759cff1e9a59cc74fe78b405, type: 3}
+  m_Color: {r: 0.7092483, g: 1, b: 0.6273585, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 5.12, y: 2.43}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -116,7 +116,7 @@ Transform:
   m_GameObject: {fileID: 1301244275915344143}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.76, y: -2.21, z: 0}
+  m_LocalPosition: {x: -0.99, y: -1.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -224,7 +224,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.0022308826, y: 0.0032228231}
+  m_Offset: {x: 0.0022308826, y: 0.0032218695}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -234,7 +234,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 2.0883484, y: 4.8491087}
+  m_Size: {x: 2.0883484, y: 4.064931}
   m_EdgeRadius: 0
 --- !u!114 &2303872907759661945
 MonoBehaviour:
@@ -262,8 +262,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::RoadDetector
   roadLayer:
     serializedVersion: 2
-    m_Bits: 0
-  checkPoints: []
+    m_Bits: 8
+  checkPoints:
+  - {fileID: 1293685960755416827}
+  - {fileID: 4376102504031158320}
+  - {fileID: 3134067328384175358}
+  - {fileID: 3373696383732360996}
   checkRadius: 0.2
   isOnRoad: 0
 --- !u!114 &8218114355492956074
@@ -307,7 +311,7 @@ Transform:
   m_GameObject: {fileID: 1817163887510422291}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.81, y: 2.03, z: 0}
+  m_LocalPosition: {x: 0.99, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -338,7 +342,7 @@ Transform:
   m_GameObject: {fileID: 3007200109603663133}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.84, y: 2.04, z: 0}
+  m_LocalPosition: {x: -1, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -369,7 +373,7 @@ Transform:
   m_GameObject: {fileID: 3999861355660858107}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.77, y: -2.24, z: 0}
+  m_LocalPosition: {x: 0.97, y: -1.99, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
