@@ -96,19 +96,6 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -116,12 +103,12 @@ TextureImporter:
       name: Porsche 911 Carrera 1998_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 7
-        width: 512
-        height: 243
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 16
+        y: 33
+        width: 480
+        height: 192
+      alignment: 9
+      pivot: {x: 0.78922725, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
@@ -138,7 +125,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 19c04c7e8ebdabb5fb626c9c0b5db554
+    spriteID: 268ac55c0681b4c48b0b1f8876bcc7cf
     internalID: 0
     vertices: []
     indices: 
