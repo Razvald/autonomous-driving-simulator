@@ -1,10 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-/// <summary>
-/// Управляет движением автомобиля в 2D.
-/// Обрабатывает ввод, применяет ускорение, поворот и подавляет боковое скольжение.
-/// </summary>
+// Управляет движением автомобиля в 2D.
+// Обрабатывает ввод, применяет ускорение, поворот и подавляет боковое скольжение.
 public class CarController : MonoBehaviour
 {
     [Header("Параметры движения")]
@@ -38,13 +36,8 @@ public class CarController : MonoBehaviour
     void OnEnable() => inputActions.Enable();
     void OnDisable() => inputActions.Disable();
 
-    /// <summary>
-    /// FixedUpdate вызывается с фиксированной частотой (по умолчанию 50 раз в секунду).
-    /// Используется для работы с физикой, в отличие от Update (который зависит от FPS).
-    /// </summary>
-    /// <summary>
-    /// Основной цикл физики
-    /// </summary>
+    // FixedUpdate вызывается с фиксированной частотой (по умолчанию 50 раз в секунду).
+    // Основной цикл физики
     void FixedUpdate()
     {
         Vector2 input = ReadInput();
@@ -54,19 +47,15 @@ public class CarController : MonoBehaviour
         ApplyDriftCorrection();
     }
 
-    /// <summary>
-    /// Считывает ввод игрока
-    /// </summary>
-    /// <returns>Вектор (X — поворот, Y — газ)</returns>
+    // Считывает ввод игрока
+    // Вектор (X — поворот, Y — газ)
     private Vector2 ReadInput()
     {
         return inputActions.Player.Move.ReadValue<Vector2>();
     }
 
-    /// <summary>
-    /// Применяет ускорение и ограничивает максимальную скорость
-    /// </summary>
-    /// <param name="move">Газ (-1..1)</param>
+    // Применяет ускорение и ограничивает максимальную скорость
+    // Газ (-1..1)
     private void ApplyMovement(float move)
     {
         rb.AddForce(transform.up * move * acceleration);
@@ -77,10 +66,8 @@ public class CarController : MonoBehaviour
         }
     }
 
-    /// <summary>
     /// Управляет поворотом автомобиля
-    /// </summary>
-    /// <param name="turn">Поворот (-1..1)</param>
+    /// Поворот (-1..1)
     private void ApplySteering(float turn)
     {
         float forwardSpeed = GetForwardSpeed();
@@ -97,25 +84,19 @@ public class CarController : MonoBehaviour
         rb.angularVelocity = -turn * steering * steeringFactor * direction;
     }
 
-    /// <summary>
-    /// Возвращает скорость вдоль направления машины
-    /// </summary>
+    // Возвращает скорость вдоль направления машины
     private float GetForwardSpeed()
     {
         return Vector2.Dot(rb.linearVelocity, transform.up);
     }
 
-    /// <summary>
-    /// Рассчитывает коэффициент поворота в зависимости от скорости
-    /// </summary>
+    // Рассчитывает коэффициент поворота в зависимости от скорости
     private float CalculateSteeringFactor()
     {
         return Mathf.Pow(rb.linearVelocity.magnitude / maxSpeed, 0.5f);
     }
 
-    /// <summary>
-    /// Уменьшает боковое скольжение автомобиля
-    /// </summary>
+    // Уменьшает боковое скольжение автомобиля
     private void ApplyDriftCorrection()
     {
         Vector2 forward = transform.up * Vector2.Dot(rb.linearVelocity, transform.up);
