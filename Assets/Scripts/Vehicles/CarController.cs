@@ -1,107 +1,123 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-// Управляет движением автомобиля в 2D.
-// Обрабатывает ввод, применяет ускорение, поворот и подавляет боковое скольжение.
+/// <summary>
+/// Управляет движением автомобиля в 2D.
+/// Машина получает ввод через New Input System, разгоняется силой,
+/// поворачивает через angularVelocity и частично гасит боковое скольжение.
+/// </summary>
 public class CarController : MonoBehaviour
 {
     [Header("Параметры движения")]
+    [Tooltip("Сила ускорения. Чем выше значение, тем быстрее машина набирает скорость")]
+    [SerializeField] private float acceleration = 8f;
 
-    [Tooltip("Ускорение автомобиля")]
-    public float acceleration = 8f;
+    [Tooltip("Скорость поворота. Чем выше значение, тем быстрее машина вращается")]
+    [SerializeField] private float steering = 240f;
 
-    [Tooltip("Скорость поворота (град/с)")]
-    public float steering = 240f;
+    [Tooltip("Максимальная скорость машины")]
+    [SerializeField] private float maxSpeed = 60f;
 
-    [Tooltip("Максимальная скорость")]
-    public float maxSpeed = 60f;
+    [Tooltip("Линейное затухание Rigidbody2D. Уменьшает скольжение и плавно замедляет машину")]
+    [SerializeField] private float damping = 1f;
 
-    [Tooltip("Линейное затухание (сопротивление движению)")]
-    public float damping = 1f;
+    [Tooltip("Минимальная скорость для поворота")]
+    [SerializeField] private float minSteeringSpeed = 0.3f;
+
+    [Tooltip("Коэффициент бокового трения (0-1). Чем меньше, тем больше скольжения")]
+    [SerializeField] private float lateralFriction = 0.2f;
 
     private Rigidbody2D rb;
-    private InputSystem_Actions inputActions;
+    private InputSystem_Actions input;
 
-    void Awake()
+    /// <summary>
+    /// Инициализирует систему ввода.
+    /// </summary>
+    private void Awake()
     {
-        inputActions = new InputSystem_Actions();
+        input = new InputSystem_Actions();
     }
 
-    void Start()
+    /// <summary>
+    /// Получает компонент Rigidbody2D и настраивает затухание.
+    /// </summary>
+    private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.linearDamping = damping;
     }
 
-    void OnEnable() => inputActions.Enable();
-    void OnDisable() => inputActions.Disable();
+    /// <summary>
+    /// Включает обработку ввода при активации объекта.
+    /// </summary>
+    private void OnEnable() => input.Enable();
 
-    // FixedUpdate вызывается с фиксированной частотой (по умолчанию 50 раз в секунду).
-    // Основной цикл физики
-    void FixedUpdate()
+    /// <summary>
+    /// Отключает обработку ввода при деактивации объекта.
+    /// </summary>
+    private void OnDisable() => input.Disable();
+
+    /// <summary>
+    /// Вызывается каждый физический кадр. Обрабатывает движение автомобиля.
+    /// </summary>
+    private void FixedUpdate()
     {
-        Vector2 input = ReadInput();
+        Vector2 inputVector = input.Player.Move.ReadValue<Vector2>();
 
-        ApplyMovement(input.y);
-        ApplySteering(input.x);
-        ApplyDriftCorrection();
+        ApplyAcceleration(inputVector.y);
+        LimitSpeed();
+        ApplySteering(inputVector.x);
+        ApplyLateralFriction();
     }
 
-    // Считывает ввод игрока
-    // Вектор (X — поворот, Y — газ)
-    private Vector2 ReadInput()
+    /// <summary>
+    /// Разгоняет машину, применяя силу в направлении вперед.
+    /// </summary>
+    /// <param name="throttle">Значение газа от -1 до 1</param>
+    private void ApplyAcceleration(float throttle)
     {
-        return inputActions.Player.Move.ReadValue<Vector2>();
+        rb.AddForce(acceleration * throttle * transform.up);
     }
 
-    // Применяет ускорение и ограничивает максимальную скорость
-    // Газ (-1..1)
-    private void ApplyMovement(float move)
+    /// <summary>
+    /// Ограничивает максимальную скорость машины.
+    /// </summary>
+    private void LimitSpeed()
     {
-        rb.AddForce(transform.up * move * acceleration);
-
         if (rb.linearVelocity.magnitude > maxSpeed)
         {
             rb.linearVelocity = rb.linearVelocity.normalized * maxSpeed;
         }
     }
 
-    /// Управляет поворотом автомобиля
-    /// Поворот (-1..1)
-    private void ApplySteering(float turn)
+    /// <summary>
+    /// Поворачивает машину с учетом текущей скорости и направления движения.
+    /// </summary>
+    /// <param name="turnInput">Значение поворота от -1 до 1</param>
+    private void ApplySteering(float turnInput)
     {
-        float forwardSpeed = GetForwardSpeed();
+        float forwardSpeed = Vector2.Dot(rb.linearVelocity, transform.up);
 
-        if (Mathf.Abs(forwardSpeed) < 0.3f)
+        if (Mathf.Abs(forwardSpeed) < minSteeringSpeed)
         {
             rb.angularVelocity = 0f;
             return;
         }
 
         float direction = forwardSpeed > 0 ? 1f : -1f;
-        float steeringFactor = CalculateSteeringFactor();
+        float speedFactor = Mathf.Pow(rb.linearVelocity.magnitude / maxSpeed, 0.5f);
 
-        rb.angularVelocity = -turn * steering * steeringFactor * direction;
+        rb.angularVelocity = -turnInput * steering * speedFactor * direction;
     }
 
-    // Возвращает скорость вдоль направления машины
-    private float GetForwardSpeed()
-    {
-        return Vector2.Dot(rb.linearVelocity, transform.up);
-    }
-
-    // Рассчитывает коэффициент поворота в зависимости от скорости
-    private float CalculateSteeringFactor()
-    {
-        return Mathf.Pow(rb.linearVelocity.magnitude / maxSpeed, 0.5f);
-    }
-
-    // Уменьшает боковое скольжение автомобиля
-    private void ApplyDriftCorrection()
+    /// <summary>
+    /// Уменьшает боковое скольжение, сохраняя продольную скорость.
+    /// </summary>
+    private void ApplyLateralFriction()
     {
         Vector2 forward = transform.up * Vector2.Dot(rb.linearVelocity, transform.up);
         Vector2 sideways = transform.right * Vector2.Dot(rb.linearVelocity, transform.right);
 
-        rb.linearVelocity = forward + sideways * 0.2f;
+        rb.linearVelocity = forward + sideways * lateralFriction;
     }
 }
