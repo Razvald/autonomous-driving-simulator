@@ -104,4 +104,35 @@ public class RoadDetector : MonoBehaviour
             onExitRoad?.Invoke();
         }
     }
+
+    // ========== Публичные методы для тестирования ==========
+    public void TestUpdate()
+    {
+        Update();
+    }
+
+    public bool TestCheckIfOnRoad()
+    {
+        return CheckIfOnRoad();
+    }
+
+    public bool TestIsPointOnRoad(Vector2 position)
+    {
+        return IsPointOnRoad(position);
+    }
+
+    public void SetCheckPoints(Transform[] points)
+    {
+        checkPoints = points;
+    }
+
+    public void SetCheckRadius(float radius)
+    {
+        checkRadius = radius;
+    }
+
+    public void SetRoadLayer(LayerMask layer)
+    {
+        roadLayer = layer;
+    }
 }

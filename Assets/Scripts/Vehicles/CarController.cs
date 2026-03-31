@@ -26,7 +26,7 @@ public class CarController : MonoBehaviour
 
     [Tooltip("Коэффициент бокового трения (0-1). Чем меньше, тем больше скольжения")]
     [SerializeField] private float lateralFriction = 0.2f;
-
+    
     private Rigidbody2D rb;
     private InputSystem_Actions input;
 
@@ -119,5 +119,38 @@ public class CarController : MonoBehaviour
         Vector2 sideways = transform.right * Vector2.Dot(rb.linearVelocity, transform.right);
 
         rb.linearVelocity = forward + sideways * lateralFriction;
+    }
+
+    // ========== Публичные методы для тестирования ==========
+    public void TestLimitSpeed()
+    {
+        LimitSpeed();
+    }
+
+    public void TestApplyAcceleration(float throttle)
+    {
+        ApplyAcceleration(throttle);
+    }
+
+    public void TestApplySteering(float turnInput)
+    {
+        ApplySteering(turnInput);
+    }
+
+    public void TestApplyLateralFriction()
+    {
+        ApplyLateralFriction();
+    }
+
+    public float MaxSpeed
+    {
+        get => maxSpeed;
+        set => maxSpeed = value;
+    }
+
+    // Метод для установки Rigidbody2D из тестов
+    public void SetRigidbody(Rigidbody2D rigidbody)
+    {
+        rb = rigidbody;
     }
 }

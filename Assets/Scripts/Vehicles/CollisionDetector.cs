@@ -66,4 +66,31 @@ public class CollisionDetector : MonoBehaviour
     {
         return obj.CompareTag("Car");
     }
+
+    // ========== Публичные методы для тестирования ==========
+
+    // Вспомогательный класс для имитации столкновения (только для тестов)
+    public class TestCollision : Collision2D
+    {
+        private GameObject gameObjectOverride;
+        
+        public TestCollision(GameObject obj)
+        {
+            gameObjectOverride = obj;
+        }
+        
+        public new GameObject gameObject => gameObjectOverride;
+    }
+    
+    public void TestHandleCollision(GameObject other)
+    {
+        // Создаем простую имитацию столкновения
+        var collision = new TestCollision(other);
+        HandleCollision(collision);
+    }
+
+    public bool TestIsCar(GameObject obj)
+    {
+        return IsCar(obj);
+    }
 }
